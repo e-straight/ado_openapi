@@ -1,0 +1,519 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "WorkItemTracking",
+    "description": "",
+    "termsOfService": "https://go.microsoft.com/fwlink/?LinkId=329770",
+    "contact": {
+      "name": "nugetvss",
+      "email": "nugetvss@microsoft.com"
+    },
+    "license": {
+      "name": "MICROSOFT SOFTWARE LICENSE TERMS",
+      "url": "https://go.microsoft.com/fwlink/?LinkId=329770"
+    },
+    "version": "7.2-preview"
+  },
+  "x-ms-vss-area": "WorkItemTracking",
+  "x-ms-vss-resource-area-id": "5264459e-e5e0-4bd8-b118-0985e68a4ec5",
+  "paths": {
+    "/{organization}/{project}/_apis/wit/workitems": {
+      "get": {
+        "tags": [
+          "Work Items"
+        ],
+        "x-ms-docs-override-version": "7.2-preview.3",
+        "x-ms-vss-resource": "workItems",
+        "x-ms-vss-method": "GetWorkItems",
+        "x-ms-preview": true,
+        "description": "Returns a list of work items (Maximum 200)",
+        "operationId": "Work Items_List",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organization",
+            "description": "The name of the Azure DevOps organization.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "ids",
+            "description": "The comma-separated list of requested work item ids. (Maximum 200 ids allowed).",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "array (int32)"
+            }
+          },
+          {
+            "in": "path",
+            "name": "project",
+            "description": "Project ID or project name",
+            "required": true,
+            "x-ms-required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "fields",
+            "description": "Comma-separated list of requested fields",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "array (string)"
+            }
+          },
+          {
+            "in": "query",
+            "name": "asOf",
+            "description": "AsOf UTC date time string",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "description": "The expand parameters for work item attributes. Possible options are { None, Relations, Fields, Links, All }.",
+            "required": false,
+            "x-ms-enum": {
+              "name": "WorkItemExpand",
+              "values": [
+                {
+                  "value": "none",
+                  "description": "Default behavior."
+                },
+                {
+                  "value": "relations",
+                  "description": "Relations work item expand."
+                },
+                {
+                  "value": "fields",
+                  "description": "Fields work item expand."
+                },
+                {
+                  "value": "links",
+                  "description": "Links work item expand."
+                },
+                {
+                  "value": "all",
+                  "description": "Expands all."
+                }
+              ]
+            },
+            "schema": {
+              "type": "string",
+              "enum": [
+                "none",
+                "relations",
+                "fields",
+                "links",
+                "all"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "errorPolicy",
+            "description": "The flag to control error policy in a bulk get work items request. Possible options are {Fail, Omit}.",
+            "required": false,
+            "x-ms-enum": {
+              "name": "WorkItemErrorPolicy",
+              "values": [
+                {
+                  "value": "fail",
+                  "description": "Fail work error policy."
+                },
+                {
+                  "value": "omit",
+                  "description": "Omit work error policy."
+                }
+              ]
+            },
+            "schema": {
+              "type": "string",
+              "enum": [
+                "fail",
+                "omit"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/api-Version-preview.3"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkItem"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "vso.work"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "accessToken": []
+    }
+  ],
+  "externalDocs": {
+    "description": "Azure DevOps REST APIs",
+    "url": "https://aka.ms/azure-devops-rest-apis"
+  },
+  "servers": [
+    {
+      "url": "https://dev.azure.com"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "api-Version-preview.1": {
+        "name": "api-version",
+        "in": "query",
+        "description": "Version of the API to use.  This should be set to '7.2-preview.1' to use this version of the api.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "api-Version-preview.2": {
+        "name": "api-version",
+        "in": "query",
+        "description": "Version of the API to use.  This should be set to '7.2-preview.2' to use this version of the api.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "api-Version-preview.3": {
+        "name": "api-version",
+        "in": "query",
+        "description": "Version of the API to use.  This should be set to '7.2-preview.3' to use this version of the api.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "api-Version-preview.4": {
+        "name": "api-version",
+        "in": "query",
+        "description": "Version of the API to use.  This should be set to '7.2-preview.4' to use this version of the api.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "requestBodies": {
+      "CommentCreate": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CommentCreate"
+            }
+          }
+        },
+        "description": "Comment create request.",
+        "required": true
+      },
+      "CommentUpdate": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CommentUpdate"
+            }
+          }
+        },
+        "description": "Comment update request.",
+        "required": true
+      },
+      "Attachments_CreateBody": {
+        "content": {
+          "application/octet-stream": {
+            "schema": {
+              "type": "string",
+              "format": "Stream"
+            }
+          }
+        },
+        "description": "Stream to upload",
+        "required": true
+      }
+    },
+    "securitySchemes": {
+      "accessToken": {
+        "type": "http",
+        "description": "Personal access token. Use any value for the user name and the token as the password.",
+        "scheme": "basic"
+      },
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://app.vssps.visualstudio.com/oauth2/authorize&response_type=Assertion",
+            "tokenUrl": "https://app.vssps.visualstudio.com/oauth2/token",
+            "scopes": {
+              "vso.githubconnections_manage": "Grants the ability to read and manage github connections and github repositories data",
+              "vso.githubconnections": "Grants the ability to read github connections and github repositories data",
+              "vso.work": "Grants the ability to read work items, queries, boards, area and iterations paths, and other work item tracking related metadata. Also grants the ability to execute queries, search work items and to receive notifications about work item events via service hooks.",
+              "vso.work_write": "Grants the ability to read, create, and update work items and queries, update board metadata, read area and iterations paths other work item tracking related metadata, execute queries, and to receive notifications about work item events via service hooks.",
+              "vso.work_full": "Grants full access to work items, queries, backlogs, plans, and work item tracking metadata. Also provides the ability to receive notifications about work item events via service hooks."
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "CommentCreate": {
+        "description": "Represents a request to create a work item comment.",
+        "type": "object",
+        "properties": {
+          "text": {
+            "description": "The text of the comment.",
+            "type": "string"
+          }
+        }
+      },
+      "CommentUpdate": {
+        "description": "Represents a request to update a work item comment.",
+        "type": "object",
+        "properties": {
+          "text": {
+            "description": "The updated text of the comment.",
+            "type": "string"
+          }
+        }
+      },
+      "Link": {
+        "description": "Link description.",
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "description": "Collection of link attributes.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "rel": {
+            "description": "Relation type.",
+            "type": "string"
+          },
+          "url": {
+            "description": "Link url.",
+            "type": "string"
+          }
+        }
+      },
+      "ReferenceLinks": {
+        "description": "The class to represent a collection of REST reference links.",
+        "type": "object",
+        "properties": {
+          "links": {
+            "description": "The readonly view of the links.  Because Reference links are readonly, we only want to expose them as read only.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "WorkItem": {
+        "description": "Describes a work item.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/WorkItemTrackingResource"
+          }
+        ],
+        "properties": {
+          "commentVersionRef": {
+            "$ref": "#/components/schemas/WorkItemCommentVersionRef"
+          },
+          "fields": {
+            "description": "Map of field and values for the work item.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "id": {
+            "description": "The work item ID.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "relations": {
+            "description": "Relations of the work item.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkItemRelation"
+            }
+          },
+          "rev": {
+            "description": "Revision number of the work item.",
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "WorkItemClassificationNode": {
+        "description": "Defines a classification node for work item tracking.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/WorkItemTrackingResource"
+          }
+        ],
+        "properties": {
+          "attributes": {
+            "description": "Dictionary that has node attributes like start/finish date for iteration nodes.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          },
+          "children": {
+            "description": "List of child nodes fetched.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkItemClassificationNode"
+            }
+          },
+          "hasChildren": {
+            "description": "Flag that indicates if the classification node has any child nodes.",
+            "type": "boolean"
+          },
+          "id": {
+            "description": "Integer ID of the classification node.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "identifier": {
+            "description": "GUID ID of the classification node.",
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "description": "Name of the classification node.",
+            "type": "string"
+          },
+          "path": {
+            "description": "Path of the classification node.",
+            "type": "string"
+          },
+          "structureType": {
+            "description": "Node structure type.",
+            "enum": [
+              "area",
+              "iteration"
+            ],
+            "x-ms-enum": {
+              "name": "TreeNodeStructureType",
+              "values": [
+                {
+                  "value": "area",
+                  "description": "Area type."
+                },
+                {
+                  "value": "iteration",
+                  "description": "Iteration type."
+                }
+              ]
+            }
+          }
+        }
+      },
+      "WorkItemCommentVersionRef": {
+        "description": "Represents the reference to a specific version of a comment on a Work Item.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/WorkItemTrackingResourceReference"
+          }
+        ],
+        "properties": {
+          "commentId": {
+            "description": "The id assigned to the comment.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "createdInRevision": {
+            "description": "[Internal] The work item revision where this comment was originally added.",
+            "type": "integer",
+            "format": "int32"
+          },
+          "isDeleted": {
+            "description": "[Internal] Specifies whether comment was deleted.",
+            "type": "boolean"
+          },
+          "text": {
+            "description": "[Internal] The text of the comment.",
+            "type": "string"
+          },
+          "version": {
+            "description": "The version number.",
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "WorkItemRelation": {
+        "description": "",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Link"
+          }
+        ],
+        "properties": {}
+      },
+      "WorkItemTrackingResource": {
+        "description": "Base class for WIT REST resources.",
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/WorkItemTrackingResourceReference"
+          }
+        ],
+        "properties": {
+          "_links": {
+            "$ref": "#/components/schemas/ReferenceLinks"
+          }
+        }
+      },
+      "WorkItemTrackingResourceReference": {
+        "description": "Base class for work item tracking resource references.",
+        "type": "object",
+        "properties": {
+          "url": {
+            "description": "REST URL for the resource.",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
